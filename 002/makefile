@@ -1,6 +1,12 @@
-FC = mpiifort -g -O0
-CXX = mpiicc -g -O0
-LINKER = mpiifort -cxxlib
+ifeq ($(CLUSTER),DRACO)
+  FC = mpiifort -g -O0
+  CXX = mpiicc -g -O0
+  LINKER = mpiifort -cxxlib
+else
+  FC = mpif90 -g -O0
+  CXX = mpicc -g -O0
+  LINKER = mpif90 -lstdc++
+endif
 
 all: problem
 
@@ -15,3 +21,6 @@ problem_f.o: problem_f.f90
 
 clean:
 	rm -f *.o *.mod *.MOD problem
+
+help:
+	@echo FC is $(FC)
