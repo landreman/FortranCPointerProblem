@@ -1,0 +1,5 @@
+*~
+*.mod
+slurm*
+problem
+*.o
